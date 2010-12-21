@@ -67,7 +67,7 @@ namespace TenderApiTests
         {
             User u = _testApi.FindUser(_email);
 
-            Assert.AreEqual("ericn", u.name);
+            Assert.AreEqual(_userName, u.name);
         }
 
         [Test]

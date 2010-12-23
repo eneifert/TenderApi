@@ -1,4 +1,4 @@
-Before the Tests will run you need to create a TenderSettings.cs file in TenderApiTests.
+For the Tests to run you need to have and configure the TenderSettings.cs file in TenderApiTests.
 
 Here is a sample file:
 

@@ -64,17 +64,7 @@ namespace TenderApi
         /// <returns></returns>
         public List<Discussion> GetDiscussionsForEmail(string email)
         {
-
-            var request = new RestRequest
-            {
-                Method = Method.GET,
-                RequestFormat = RestSharp.DataFormat.Json,
-                Resource = "discussions",
-                RootElement = "discussions"
-            };
-            request.AddParameter("email", email);
-
-            return Execute<List<Discussion>>(request);
+            return GetDiscussionsForUser(FindUser(email).GetUserID()); 
         }
 
         /// <summary>

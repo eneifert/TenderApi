@@ -1,0 +1,21 @@
+<object id="scPlayer" 
+class="embeddedObject" 
+width="640" 
+height="480" 
+type="application/x-shockwave-flash" data="http://content.screencast.com/users/RitterIM/folders/Default/media/3c092189-dded-4434-b2aa-80c59cc36458/mp4h264player.swf" >
+<param name="movie" 
+value="http://content.screencast.com/users/RitterIM/folders/Default/media/3c092189-dded-4434-b2aa-80c59cc36458/mp4h264player.swf" />
+<param name="quality" value="high" />
+<param name="bgcolor" value="#FFFFFF" />
+<param name="flashVars" value="thumb=http://content.screencast.com/users/RitterIM/folders/Default/media/3c092189-dded-4434-b2aa-80c59cc36458/FirstFrame.jpg
+containerwidth=640
+containerheight=480
+content=http://content.screencast.com/users/RitterIM/folders/Default/media/3c092189-dded-4434-b2aa-80c59cc36458/New%20Agents%2012-30-2010.mp4
+blurover=false" />
+<param name="allowFullScreen" value="true" />
+<param name="scale" value="showall" />
+<param name="allowScriptAccess" value="always" />
+<param name="base" value="http://content.screencast.com/users/RitterIM/folders/Default/media/3c092189-dded-4434-b2aa-80c59cc36458/" />
+<iframe type="text/html" frameborder="0" scrolling="no" style="overflow:hidden;" src="http://www.screencast.com/users/RitterIM/folders/Default/media/3c092189-dded-4434-b2aa-80c59cc36458/embed" height="480" width="640" >
+</iframe>
+</object>

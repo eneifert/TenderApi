@@ -7,10 +7,10 @@ namespace TenderApiTests
 {
     public class TenderSettings
     {
-        public const string Site = "SITE";
-        public const string Email = "EMAIL";
-        public const string UserName = "USER";
-        public const string Password = "PASSWORD";
-        public const string ApiKey = "API_KEY";
+        public const string Site = "yoursite";
+        public const string Email = "user@place.com";
+        public const string UserName = "user";
+        public const string Password = "password";
+        public const string ApiKey = "myapikey";
     }
 }

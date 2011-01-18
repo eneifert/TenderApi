@@ -85,7 +85,8 @@ namespace TenderApiTests
         public void Can_Get_Categories()
         {
 
-            Assert.Greater(_testApi.GetCategories().Count, 0);
+            var cats = _testApi.GetCategories();
+            Assert.Greater(cats.Count, 0);
         }
 
         #endregion

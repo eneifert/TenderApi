@@ -74,30 +74,7 @@ namespace TenderApi
             request.AddParameter("title", title);
 
             return  Execute<User>(request);
-        }
-
-        
-       
-
-
-
-        public static class Users
-        {
-            public static IList<User> Get()
-            {
-
-                return null;
-            }
-        }
-
-        public static class Discussions
-        {
-            public static IList<User> Get()
-            {
-                return null;
-            }
-        }
-       
+        }                         
     }
     
 }

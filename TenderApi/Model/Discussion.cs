@@ -49,5 +49,13 @@ namespace TenderApi.Model
             //So far the only way I see to get the user id is by parsing the href
             return this.GetLastIDFromHref(href);
         }
+
+        public string GetCategory()
+        {
+            string[] s = html_href.Split('/');
+
+            //format is http://{site}/discussions/{category}/{title or id}
+            return (s.Length > 5 ? s[4] : string.Empty);
+        }
     }   
 }

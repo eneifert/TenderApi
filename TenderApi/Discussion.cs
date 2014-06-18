@@ -93,7 +93,7 @@ namespace TenderApi
             request.AddParameter("body", body);
             request.AddParameter("public", isPublic.ToString());
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
@@ -120,7 +120,7 @@ namespace TenderApi
             request.AddParameter("body", body);
             request.AddParameter("skip_spam", skipSpam.ToString());
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
@@ -141,7 +141,7 @@ namespace TenderApi
                 RootElement = "discussions"
             };
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.OK;
         }
     }

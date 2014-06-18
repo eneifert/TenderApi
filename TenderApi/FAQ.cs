@@ -43,7 +43,7 @@ namespace TenderApi
             if (published != null)
                 request.AddParameter("published_at", published.Value.ToString("s"));
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
@@ -61,7 +61,7 @@ namespace TenderApi
             if (published != null)
                 request.AddParameter("published_at", published.Value.ToString("s"));
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.OK;
         }
     }

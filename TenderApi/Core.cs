@@ -53,7 +53,7 @@ namespace TenderApi
 			return response.Data;
 		}
 
-		public RestResponse Execute(RestRequest request)
+		public IRestResponse Execute(RestRequest request)
 		{
 			return _client.Execute(request);
 		}

@@ -46,7 +46,7 @@ namespace TenderApi
         {
             var request = new RestRequest {Method = Method.GET, RequestFormat = RestSharp.DataFormat.Json};
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.OK;
         }
 

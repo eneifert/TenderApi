@@ -23,6 +23,6 @@ namespace TenderApi.Model
         public string html_href { get; set; }
         public string user_href { get; set; }
         public string created_at { get; set; }
-
+        public bool @internal { get; set; }
     }
 }

@@ -144,5 +144,17 @@ namespace TenderApi
             IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.OK;
         }
+
+        public void QueueDiscussion(int discussionId, int queueId)
+        {
+            var request = new RestRequest
+            {
+                Method = Method.POST,
+                RequestFormat = RestSharp.DataFormat.Json,
+                Resource = string.Format("discussions/{0}/queue?queue={1}", discussionId, queueId),
+            };
+
+            Execute(request);
+        }
     }
 }

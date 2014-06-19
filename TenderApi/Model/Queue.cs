@@ -17,5 +17,10 @@ namespace TenderApi.Model
         public string html_href { get; set; }
         public string href { get; set; }
         public string discussions_href { get; set; }
+
+        public int GetQueueId()
+        {
+            return GetLastIDFromHref(href);
+        }
     }
 }

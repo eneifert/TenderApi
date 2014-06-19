@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using TenderApi.Model;
+
+namespace TenderApiTests.Model
+{
+    [TestFixture]
+    public class DiscussionCreatedCallbackArgsTests
+    {
+        private const string callbackJson =
+            "{\"user_is_supporter\":true,\"author_name\":\"tenderuser\",\"user_href\":\"https://api.tenderapp.com/site/users/3126502\",\"created_at\":\"2014-06-10T15:49:02Z\",\"formatted_body\":\"<div><p>description</p></div>\",\"number\":1,\"html_href\":\"https://site.tenderapp.com/discussions/problems/19\",\"user\":{\"comments_count\":18,\"email\":\"tenderuser@tenderapp.com\",\"enable_email_notifications\":true,\"created_at\":\"2014-06-10T07:28:04Z\",\"openid_url\":null,\"public_facing\":true,\"trusted\":true,\"title\":null,\"updated_at\":\"2014-06-10T15:50:42Z\",\"discussions_count\":4,\"company_id\":null,\"discussions_href\":\"https://api.tenderapp.com/site/users/3126502/discussions{-opt|?|page,user_email}{-join|&|page,user_email}\",\"activated_at\":\"2014-06-10T07:45:33Z\",\"external_id\":\"tenderuser@tenderapp.com\",\"name\":\"tenderuser\",\"avatar_url\":\"https://secure.gravatar.com/avatar/79ba6c508066656772067c1b447cca8b?s=32&d=identicon\",\"extras\":{\"testKey\":\"testValue\"},\"state\":\"support\",\"href\":\"https://api.tenderapp.com/site/users/3126502\"},\"internal\":false,\"system_message\":false,\"user_agent\":\"Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko\",\"assets\":[],\"user_ip\":\"10.193.58.65\",\"discussion\":{\"comments_count\":1,\"resolve_href\":\"https://api.tenderapp.com/site/discussions/13921017/resolve\",\"author_name\":\"tenderuser\",\"user_href\":\"https://api.tenderapp.com/site/users/3126502\",\"last_author_email\":\"tenderuser@tenderapp.com\",\"created_at\":\"2014-06-10T15:49:02Z\",\"number\":19,\"html_href\":\"https://site.tenderapp.com/discussions/problems/19\",\"cached_queue_list\":[44285],\"permalink\":\"conflict-between-recordable-and-logging-aspects\",\"title\":\"Conflict between Recordable and Logging aspects\",\"unread\":false,\"updated_at\":\"2014-06-10T15:50:45Z\",\"queue_href\":\"https://api.tenderapp.com/site/discussions/13921017/queue?queue={queue_id}\",\"comments_href\":\"https://api.tenderapp.com/site/discussions/13921017/comments{?page}\",\"private_body\":\"<ul><li>Testkey: testValue</li><li>Browser: Internet Explorer 11.0 (Windows 8.1)</li></ul>\",\"redirection_id\":null,\"last_author_name\":\"tenderuser\",\"toggle_href\":\"https://api.tenderapp.com/site/discussions/13921017/toggle\",\"change_category_href\":\"https://api.tenderapp.com/site/discussions/13921017/change_category?to={category_id}\",\"company_id\":null,\"hidden\":false,\"last_via\":\"web\",\"unresponded\":false,\"watchers_count\":1,\"activity_filter_stamp\":null,\"last_updated_at\":\"2014-06-10T15:49:02Z\",\"last_user_id\":3126502,\"public\":true,\"restore_href\":\"https://api.tenderapp.com/site/discussions/13921017/restore\",\"category_href\":\"https://api.tenderapp.com/site/categories/82527\",\"acknowledge_href\":\"https://api.tenderapp.com/site/discussions/13921017/acknowledge\",\"avg_response_time\":0,\"extras\":{\"testKey\":\"testValue\",\"browser\":\"Internet Explorer 11.0 (Windows 8.1)\"},\"via\":\"web\",\"last_comment_id\":33345944,\"state\":\"open\",\"unresolve_href\":\"https://api.tenderapp.com/site/discussions/13921017/unresolve\",\"unqueue_href\":\"https://api.tenderapp.com/site/discussions/13921017/unqueue?queue={queue_id}\",\"author_email\":\"tenderuser@tenderapp.com\",\"href\":\"https://api.tenderapp.com/site/discussions/13921017\"},\"referrer\":\"https://site.tenderapp.com/dashboard/discussion\",\"resolution\":null,\"via\":\"web\",\"body\":\"description\",\"author_email\":\"tenderuser@tenderapp.com\",\"category\":{\"autoresponder_id\":null,\"created_at\":\"2014-06-10T07:28:04Z\",\"last_discussion_id\":13921017,\"mail_template_id\":null,\"html_href\":\"https://site.tenderapp.com/discussions/problems\",\"code\":\"0264467bb12722ce6\",\"heartbeat_on\":\"2014-06-10T08:26:28Z\",\"last_user_email\":null,\"summary\":\"Having some issues? Something not quite working right? Post your problems here and we\'ll try and get to them as soon as possible.\",\"resolved_discussions_count\":1,\"permalink\":\"problems\",\"updated_at\":\"2014-06-10T15:50:41Z\",\"beta\":false,\"redirection_id\":null,\"discussions_href\":\"https://api.tenderapp.com/site/categories/82527/discussions{-opt|/|state}{state}{-opt|?|page,user_email}{-join|&|page,user_email}\",\"last_updated_at\":\"2014-06-10T15:49:02Z\",\"last_user_id\":3126502,\"last_user_name\":null,\"name\":\"Problems\",\"public\":true,\"accept_email\":\"tenderuser@tenderapp.com\",\"force_readonly\":false,\"last_discussion_permalink\":\"19-conflict-between-recordable-and-logging-aspects\",\"assigned_discussions_count\":0,\"open_discussions_count\":8,\"important\":false,\"formatted_summary\":\"<div><p>Having some issues? Something not quite working right? Post your\\nproblems here and we\'ll try and get to them as soon as\\npossible.</p></div>\",\"last_comment_id\":33345944,\"visible\":true,\"href\":\"https://api.tenderapp.com/site/categories/82527\"}}";
+
+        [Test]
+        public void Can_be_deserialized_from_json()
+        {
+            var callbackArgs = JsonConvert.DeserializeObject<DiscussionCreatedCallbackArgs>(callbackJson);
+
+            Assert.IsNotNull(callbackArgs);
+            Assert.IsNotNull(callbackArgs.Discussion);
+            Assert.IsNotNull(callbackArgs.User);
+            Assert.IsNotNull(callbackArgs.Category);
+        }
+    }
+}

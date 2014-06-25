@@ -82,10 +82,12 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="Discussion.cs" />
     <Compile Include="FAQ.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\Company.cs" />
     <Compile Include="Model\Discussion.cs" />
     <Compile Include="Model\DiscussionCreatedCallbackArgs.cs" />
     <Compile Include="Model\DiscussionSupportClasses.cs" />

@@ -74,7 +74,21 @@ namespace TenderApi
             request.AddParameter("title", title);
 
             return  Execute<User>(request);
-        }                         
+        }
+
+        public User AssignCompany(int userId, int companyId)
+        {
+            var request = new RestRequest
+            {
+                Resource = string.Format("users/{0}", userId),
+                Method = Method.PUT,
+                RequestFormat = RestSharp.DataFormat.Json,
+            };
+
+            request.AddParameter("company_id", companyId);
+
+            return Execute<User>(request);
+        }
     }
     
 }

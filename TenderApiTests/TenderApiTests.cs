@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
@@ -75,6 +76,20 @@ namespace TenderApiTests
         {
             User u = _testApi.CreateUser("test@test.com", "testtest", "testtest", name: "test", title: "that's right Test");
             Assert.AreEqual("test", u.name);
+        }
+
+        [Test]
+        public void Can_AssignCompany()
+        {
+            User u = _testApi.CreateUser("test@test.com", "testtest", "testtest", name: "test", title: "that's right Test");
+
+            Company company = _testApi.CreateCompany(Guid.NewGuid().ToString());
+            u.company_id = company.Id;
+
+            User updatedUser = _testApi.AssignCompany(u.GetUserID(), company.Id);
+
+            Assert.IsTrue(updatedUser.company_id.HasValue);
+            Assert.AreEqual(company.Id, updatedUser.company_id.Value);
         }
 
         #endregion
@@ -231,6 +246,28 @@ namespace TenderApiTests
 
             List<Comment> c = _testApi.GetComments(dID);
             Assert.Greater(c.Count, 0);
+        }
+
+        #endregion
+
+        #region Companies Tests
+
+        [Test]
+        public void Can_Get_Companies()
+        {
+            List<Company> companies = _testApi.GetCompanies();
+
+            Assert.Greater(companies.Count, 0);
+        }
+
+        [Test]
+        public void Can_Create_Company()
+        {
+            string companyName = Guid.NewGuid().ToString();
+
+            Company company = _testApi.CreateCompany(companyName);
+
+            Assert.AreEqual(companyName, company.Name);
         }
         #endregion
     }

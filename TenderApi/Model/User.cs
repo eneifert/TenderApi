@@ -21,7 +21,8 @@ namespace TenderApi.Model
         public string created_at { get; set; }
         public string updated_at { get; set; }
         public string activated_at { get; set; }
-        public string avatar_url { get; set; }          
+        public string avatar_url { get; set; }
+        public int? company_id { get; set; }
 
         public int GetUserID()
         {

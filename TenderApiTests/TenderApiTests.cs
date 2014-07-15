@@ -17,6 +17,7 @@ namespace TenderApiTests
         private const string _userName = TenderSettings.UserName;
         private const string _password = TenderSettings.Password;
         private const string _apiKey = TenderSettings.ApiKey;
+        private const string _ssoKey = TenderSettings.SsoKey;
 
         TenderApi.TenderApi _testApi = new TenderApi.TenderApi(_site, _apiKey);
 
@@ -76,6 +77,22 @@ namespace TenderApiTests
         {
             User u = _testApi.CreateUser("test@test.com", "testtest", "testtest", name: "test", title: "that's right Test");
             Assert.AreEqual("test", u.name);
+        }
+
+        [Test]
+        public void Can_Create_SSO_User()
+        {
+            //string expectedEmail = Guid.NewGuid().ToString() + "@test.com";
+            string expectedEmail = "jakub.linhart@gmail.com";
+            _testApi = new TenderApi.TenderApi(_site, _userName, _password);
+
+            _testApi.CreateUser(expectedEmail, _site, _ssoKey);
+
+            // SSO CreateUser returns user entity but it doesn't contain email
+            User u = _testApi.FindUser(expectedEmail);
+
+            Assert.NotNull(u);
+            Assert.AreEqual(expectedEmail, u.email);
         }
 
         [Test]
@@ -247,6 +264,26 @@ namespace TenderApiTests
             List<Comment> c = _testApi.GetComments(dID);
             Assert.Greater(c.Count, 0);
         }
+
+        [Test]
+        public void Can_Create_Comment()
+        {
+            List<Discussion> ds = _testApi.GetDiscussions();
+            int dID = ds.First().GetDiscussionID();
+            string commentGuid = Guid.NewGuid().ToString();
+
+            _testApi = new TenderApi.TenderApi(_site, _userName, _password);            
+
+            Comment createdComment = _testApi.AddComment(dID, new Comment
+            {
+                body = "This is a comment: Greetings from TenderApi tests. " + commentGuid,
+            });
+
+            List<Comment> cs = _testApi.GetComments(dID);
+
+            Assert.IsTrue(cs.Any(c => c.body.Contains(commentGuid)));
+        }
+
 
         #endregion
 

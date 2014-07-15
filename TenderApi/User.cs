@@ -76,6 +76,19 @@ namespace TenderApi
             return  Execute<User>(request);
         }
 
+        public User CreateUser(string email, string site, string ssoKey)
+        {
+            string ssoToken = GenerateSsoToken(email, site, ssoKey);
+
+            var request = new RestRequest
+            {
+                Resource = "/profile?sso=" + ssoToken,
+                Method = Method.GET,
+            };
+
+            return Execute<User>(request);
+        }
+
         public User AssignCompany(int userId, int companyId)
         {
             var request = new RestRequest

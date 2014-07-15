@@ -18,7 +18,7 @@ namespace TenderApi
             return GetCollection<Comment>(string.Format("discussions/{0}/comments", discussionID), "comments");
         }
     
-        public void AddComment(int discussionId, Comment comment)
+        public Comment AddComment(int discussionId, Comment comment)
         {
             var request = new RestRequest
             {
@@ -29,7 +29,7 @@ namespace TenderApi
 
             request.AddBody(comment);
 
-            var result = Execute(request);
+            return Execute<Comment>(request);
         }
     }
 }

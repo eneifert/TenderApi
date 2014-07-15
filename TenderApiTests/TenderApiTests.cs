@@ -82,8 +82,7 @@ namespace TenderApiTests
         [Test]
         public void Can_Create_SSO_User()
         {
-            //string expectedEmail = Guid.NewGuid().ToString() + "@test.com";
-            string expectedEmail = "jakub.linhart@gmail.com";
+            string expectedEmail = Guid.NewGuid().ToString() + "@test.com";
             _testApi = new TenderApi.TenderApi(_site, _userName, _password);
 
             _testApi.CreateUser(expectedEmail, _site, _ssoKey);

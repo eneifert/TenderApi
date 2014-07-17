@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
@@ -16,6 +17,7 @@ namespace TenderApiTests
         private const string _userName = TenderSettings.UserName;
         private const string _password = TenderSettings.Password;
         private const string _apiKey = TenderSettings.ApiKey;
+        private const string _ssoKey = TenderSettings.SsoKey;
 
         TenderApi.TenderApi _testApi = new TenderApi.TenderApi(_site, _apiKey);
 
@@ -75,6 +77,35 @@ namespace TenderApiTests
         {
             User u = _testApi.CreateUser("test@test.com", "testtest", "testtest", name: "test", title: "that's right Test");
             Assert.AreEqual("test", u.name);
+        }
+
+        [Test]
+        public void Can_Create_SSO_User()
+        {
+            string expectedEmail = Guid.NewGuid().ToString() + "@test.com";
+            _testApi = new TenderApi.TenderApi(_site, _userName, _password);
+
+            _testApi.CreateUser(expectedEmail, _site, _ssoKey);
+
+            // SSO CreateUser returns user entity but it doesn't contain email
+            User u = _testApi.FindUser(expectedEmail);
+
+            Assert.NotNull(u);
+            Assert.AreEqual(expectedEmail, u.email);
+        }
+
+        [Test]
+        public void Can_AssignCompany()
+        {
+            User u = _testApi.CreateUser("test@test.com", "testtest", "testtest", name: "test", title: "that's right Test");
+
+            Company company = _testApi.CreateCompany(Guid.NewGuid().ToString());
+            u.company_id = company.Id;
+
+            User updatedUser = _testApi.AssignCompany(u.GetUserID(), company.Id);
+
+            Assert.IsTrue(updatedUser.company_id.HasValue);
+            Assert.AreEqual(company.Id, updatedUser.company_id.Value);
         }
 
         #endregion
@@ -231,6 +262,48 @@ namespace TenderApiTests
 
             List<Comment> c = _testApi.GetComments(dID);
             Assert.Greater(c.Count, 0);
+        }
+
+        [Test]
+        public void Can_Create_Comment()
+        {
+            List<Discussion> ds = _testApi.GetDiscussions();
+            int dID = ds.First().GetDiscussionID();
+            string commentGuid = Guid.NewGuid().ToString();
+
+            _testApi = new TenderApi.TenderApi(_site, _userName, _password);            
+
+            Comment createdComment = _testApi.AddComment(dID, new Comment
+            {
+                body = "This is a comment: Greetings from TenderApi tests. " + commentGuid,
+            });
+
+            List<Comment> cs = _testApi.GetComments(dID);
+
+            Assert.IsTrue(cs.Any(c => c.body.Contains(commentGuid)));
+        }
+
+
+        #endregion
+
+        #region Companies Tests
+
+        [Test]
+        public void Can_Get_Companies()
+        {
+            List<Company> companies = _testApi.GetCompanies();
+
+            Assert.Greater(companies.Count, 0);
+        }
+
+        [Test]
+        public void Can_Create_Company()
+        {
+            string companyName = Guid.NewGuid().ToString();
+
+            Company company = _testApi.CreateCompany(companyName);
+
+            Assert.AreEqual(companyName, company.Name);
         }
         #endregion
     }

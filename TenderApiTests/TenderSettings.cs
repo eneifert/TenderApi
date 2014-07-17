@@ -12,5 +12,6 @@ namespace TenderApiTests
         public const string UserName = "user";
         public const string Password = "password";
         public const string ApiKey = "myapikey";
+        public const string SsoKey = "ssokey";
     }
 }

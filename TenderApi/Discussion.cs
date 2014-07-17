@@ -93,7 +93,7 @@ namespace TenderApi
             request.AddParameter("body", body);
             request.AddParameter("public", isPublic.ToString());
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
@@ -120,7 +120,7 @@ namespace TenderApi
             request.AddParameter("body", body);
             request.AddParameter("skip_spam", skipSpam.ToString());
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
@@ -141,8 +141,20 @@ namespace TenderApi
                 RootElement = "discussions"
             };
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        public void QueueDiscussion(int discussionId, int queueId)
+        {
+            var request = new RestRequest
+            {
+                Method = Method.POST,
+                RequestFormat = RestSharp.DataFormat.Json,
+                Resource = string.Format("discussions/{0}/queue?queue={1}", discussionId, queueId),
+            };
+
+            Execute(request);
         }
     }
 }

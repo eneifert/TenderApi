@@ -46,7 +46,7 @@ namespace TenderApi
         {
             var request = new RestRequest {Method = Method.GET, RequestFormat = RestSharp.DataFormat.Json};
 
-            RestResponse res = Execute(request);
+            IRestResponse res = Execute(request);
             return res.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
@@ -74,7 +74,34 @@ namespace TenderApi
             request.AddParameter("title", title);
 
             return  Execute<User>(request);
-        }                         
+        }
+
+        public User CreateUser(string email, string site, string ssoKey)
+        {
+            string ssoToken = GenerateSsoToken(email, site, ssoKey);
+
+            var request = new RestRequest
+            {
+                Resource = "/profile?sso=" + ssoToken,
+                Method = Method.GET,
+            };
+
+            return Execute<User>(request);
+        }
+
+        public User AssignCompany(int userId, int companyId)
+        {
+            var request = new RestRequest
+            {
+                Resource = string.Format("users/{0}", userId),
+                Method = Method.PUT,
+                RequestFormat = RestSharp.DataFormat.Json,
+            };
+
+            request.AddParameter("company_id", companyId);
+
+            return Execute<User>(request);
+        }
     }
     
 }
